@@ -5,8 +5,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent  {
-  @Output() onRefresh: EventEmitter<null> = new EventEmitter<null>();     
+  @Output() onRefresh: EventEmitter<Date> = new EventEmitter<Date>(); 
   refresh() {     
-	this.onRefresh.emit();     
+	this.onRefresh.emit(new Date());
   }     
 }

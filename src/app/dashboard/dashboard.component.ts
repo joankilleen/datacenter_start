@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';  
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Output, EventEmitter } from '@angular/core';  
 
 interface Metric {     
 	used: number,     
@@ -17,11 +17,12 @@ interface Node {
   encapsulation: ViewEncapsulation.Emulated
 })
 export class DashboardComponent implements OnInit, OnDestroy {     
-cpu: Metric;     
-mem: Metric;     
-  cluster1: Node[];     
-  cluster2: Node[];     
-  interval: any;     
+	cpu: Metric;     
+	mem: Metric;     
+	cluster1: Node[];     
+	cluster2: Node[];     
+	interval: any; 
+	@Output() onRefresh: EventEmitter<Date> = new EventEmitter<Date>();
 
   ngOnInit(): void {     
 	this.generateData();     
@@ -42,6 +43,9 @@ mem: Metric;
     this.mem = { used: 0, available: 0 };
     for (let i = 1; i < 4; i++) this.cluster1.push(this.randomNode(i));
     for (let i = 4; i < 7; i++) this.cluster2.push(this.randomNode(i));
+	console.log("Emitting refresh");
+	this.onRefresh.emit(new Date());
+	
   }
 
   private randomNode(i): Node {
