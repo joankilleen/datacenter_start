@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';     
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';  
 
 interface Metric {     
 	used: number,     
@@ -13,7 +13,8 @@ interface Node {
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class DashboardComponent implements OnInit, OnDestroy {     
 cpu: Metric;     
